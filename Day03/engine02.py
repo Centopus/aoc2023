@@ -7,7 +7,8 @@
 import re
 
 #data
-inputF = open('inputMini','r')
+#inputF = open('inputMini','r')
+inputF = open('inputMini2','r')
 #inputF = open('inputFile','r')
 
 #regex filters
@@ -22,32 +23,54 @@ da = re.compile(r'[*]')
 #this one should do the parsing, this is going to be a recursive thing
 def searchFurNum(line1,line2,line3,output):
     restOfLine = ''
-    numberComplex = di.search(line2)
+    numberComplex = da.search(line2)
     if numberComplex:
         start = numberComplex.start()
         end = numberComplex.end()
-        check1 = line1[start-1:end+1]
-        check2 = line2[start-1:start]+''.rjust(end-start,'.')+line2[end:end+1]
-        check3 = line3[start-1:end+1]
-        
-        #print(check1)
-        #print(check2)
-        #print(check3)
-        if ds.search(check1):
-            #found something in first line
-            #print(line2[start:end])
-            output +=int(line2[start:end])
-        elif ds.search(check2):
-            #found something in second line
-            #print(line2[start:end])
-            output +=int(line2[start:end])
-        elif ds.search(check3):
-            #found something in third line
-            #print(line2[start:end])
-            output +=int(line2[start:end])
-        #else:
-            #print('do nothing')
-            #found nothing - lonely number!
+        check1 = line1[start-3:end+3]
+        check2a = line2[start-3:start]
+        check2b = line2[end:end+3]
+        check3 = line3[start-3:end+3]
+        power = 1
+
+        if di.search(check1):
+            first = di.search(check1)
+            fend = first.end()
+            second = di.search(check1[fend:end+3])
+            # start needs to be in fields 2,3,4 or end in 3,4,5
+            if fend in (3,4,5) or first.start() in (2,3,4):
+                print('c1int: '+check1[first.start():first.end()])
+                power = power*int(check1[first.start():first.end()])
+            # need to check other part of the string
+            elif second:
+                if second.end() in (3-fend,4-fend,5-fend) or second.start() in (2-fend,3-fend,4-fend):
+                    print('c1bint: '+check1[fend+second.start():fend+second.end()])
+                #second hit check same check
+        if di.search(check2a):
+            first = di.search(check2a)
+            fend = first.end()
+            # needs to be in fields 2
+            if fend == 3:
+                print('c2int: '+check2a[first.start():first.end()])
+                #output +=int(line2[start:end])
+        if di.search(check2b):
+            first = di.search(check2b)
+            # needs to be in fields 0
+            if first.start() == 0:
+                print('c2bint: '+check2b[first.start():first.end()])
+                #output +=int(line2[start:end])
+        if di.search(check3):
+            first = di.search(check3)
+            fend = first.end()
+            second = di.search(check3[fend:end+3])
+            # start needs to be in fields 2,3,4 or end in 3,4,5
+            if fend in (3,4,5) or first.start() in (2,3,4):
+                print('c3int: '+check3[first.start():first.end()])
+            # need to check other part of the string
+            elif second:
+                if second.end() in (3-fend,4-fend,5-fend) or second.start() in (2-fend,3-fend,4-fend):
+                    #print('c3b: '+line3[first.end():end+3])
+                    print('c3bint: '+check3[fend+second.start():fend+second.end()])
         
         LLen = len(line1)
 
