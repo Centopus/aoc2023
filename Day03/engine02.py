@@ -8,7 +8,8 @@ import re
 
 #data
 #inputF = open('inputMini','r')
-inputF = open('inputMini2','r')
+#inputF = open('inputMini2','r')
+inputF = open('inputMini3','r')
 #inputF = open('inputFile','r')
 
 #regex filters
@@ -32,6 +33,7 @@ def searchFurNum(line1,line2,line3,output):
         check2b = line2[end:end+3]
         check3 = line3[start-3:end+3]
         power = 1
+        found = 0
 
         if di.search(check1):
             first = di.search(check1)
@@ -41,10 +43,13 @@ def searchFurNum(line1,line2,line3,output):
             if fend in (3,4,5) or first.start() in (2,3,4):
                 print('c1int: '+check1[first.start():first.end()])
                 power = power*int(check1[first.start():first.end()])
+                found +=1
             # need to check other part of the string
             elif second:
                 if second.end() in (3-fend,4-fend,5-fend) or second.start() in (2-fend,3-fend,4-fend):
                     print('c1bint: '+check1[fend+second.start():fend+second.end()])
+                    power = power*int(check1[fend+second.start():fend+second.end()])
+                    found +=1
                 #second hit check same check
         if di.search(check2a):
             first = di.search(check2a)
@@ -52,13 +57,16 @@ def searchFurNum(line1,line2,line3,output):
             # needs to be in fields 2
             if fend == 3:
                 print('c2int: '+check2a[first.start():first.end()])
+                power = power*int(check2a[first.start():first.end()])
+                found +=1
                 #output +=int(line2[start:end])
         if di.search(check2b):
             first = di.search(check2b)
             # needs to be in fields 0
             if first.start() == 0:
                 print('c2bint: '+check2b[first.start():first.end()])
-                #output +=int(line2[start:end])
+                power = power*int(check2b[first.start():first.end()])
+                found +=1
         if di.search(check3):
             first = di.search(check3)
             fend = first.end()
@@ -66,11 +74,20 @@ def searchFurNum(line1,line2,line3,output):
             # start needs to be in fields 2,3,4 or end in 3,4,5
             if fend in (3,4,5) or first.start() in (2,3,4):
                 print('c3int: '+check3[first.start():first.end()])
+                power = power*int(check3[first.start():first.end()])
+                found +=1
             # need to check other part of the string
             elif second:
                 if second.end() in (3-fend,4-fend,5-fend) or second.start() in (2-fend,3-fend,4-fend):
                     #print('c3b: '+line3[first.end():end+3])
+                    power = power*int(check3[fend+second.start():fend+second.end()])
+                    found +=1
                     print('c3bint: '+check3[fend+second.start():fend+second.end()])
+        if found == 2:
+            print(power)
+            output += power
+        elif found == 3:
+            print('WAAAAAAt')
         
         LLen = len(line1)
 
