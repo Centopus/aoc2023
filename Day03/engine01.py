@@ -7,12 +7,12 @@
 import re
 
 #data
-inputF = open('inputMini','r')
-#input = open('inputFile','r')
+#inputF = open('inputMini','r')
+inputF = open('inputFile','r')
 
 #regex filters
 di = re.compile(r'\d+')
-ds = re.compile(r'^[.]')
+ds = re.compile(r'[^.]')
 
 #funtions, well i need to recurse stuff... its easier with funtions
 #funny how python forces you to funtionize once you using multiple layers of loops
@@ -29,14 +29,25 @@ def searchFurNum(line1,line2,line3,output):
         check2 = line2[start-1:start]+''.rjust(end-start,'.')+line2[end:end+1]
         check3 = line3[start-1:end+1]
         
-        print(check1)
-        print(ds.search(check1))
-        print(check2)
-        print(ds.search(check2))
-        print(check3)
-        print(ds.search(check3))
+        #print(check1)
+        #print(check2)
+        #print(check3)
+        if ds.search(check1):
+            #found something in first line
+            #print(line2[start:end])
+            output +=int(line2[start:end])
+        elif ds.search(check2):
+            #found something in second line
+            #print(line2[start:end])
+            output +=int(line2[start:end])
+        elif ds.search(check3):
+            #found something in third line
+            #print(line2[start:end])
+            output +=int(line2[start:end])
+        #else:
+            #print('do nothing')
+            #found nothing - lonely number!
         
-        #print('Search: '+str(start) +' to '+ str(end))
         LLen = len(line1)
 
         #here happens the magix
@@ -68,13 +79,13 @@ lineLen = len(bLine)
 bLine = bLine.rstrip().rjust(lineLen+1,'.').ljust(lineLen+1,'.')
 cLine = cLine.rstrip().rjust(lineLen+1,'.').ljust(lineLen+1,'.')
 aLine = ''.rjust(lineLen+2,'.')
-print(aLine +' '+ bLine +' '+ cLine)
+#print(aLine +' '+ bLine +' '+ cLine)
 output = searchFurNum(aLine,bLine,cLine,output)
 #main loop
 loopVar = True
 while loopVar:
     aLine,bLine,cLine,loopVar = threeLines(bLine,cLine,inputF,loopVar)
-    print(aLine +' '+ bLine +' '+ cLine)
+    #print(aLine +' '+ bLine +' '+ cLine)
     output = searchFurNum(aLine,bLine,cLine,output)
 print(output)
 
