@@ -9,8 +9,8 @@ import re
 #data
 #inputF = open('inputMini','r')
 #inputF = open('inputMini2','r')
-inputF = open('inputMini3','r')
-#inputF = open('inputFile','r')
+#inputF = open('inputMini3','r')
+inputF = open('inputFile','r')
 
 #regex filters
 di = re.compile(r'\d+')
@@ -54,12 +54,19 @@ def searchFurNum(line1,line2,line3,output):
         if di.search(check2a):
             first = di.search(check2a)
             fend = first.end()
+            second = di.search(check2a[fend:end+3])
             # needs to be in fields 2
             if fend == 3:
-                print('c2int: '+check2a[first.start():first.end()])
+                print('c2aint: '+check2a[first.start():first.end()])
                 power = power*int(check2a[first.start():first.end()])
                 found +=1
                 #output +=int(line2[start:end])
+            elif second:
+                if second.end() == 3-fend:
+                    print('c2abint: '+check2a[fend+second.start():fend+second.end()])
+                    power = power*int(check2a[fend+second.start():fend+second.end()])
+                    found +=1
+                #second hit check same check
         if di.search(check2b):
             first = di.search(check2b)
             # needs to be in fields 0
