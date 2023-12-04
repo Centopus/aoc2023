@@ -11,11 +11,8 @@ def readInput(filename):
     return data
 
 #data
-#data = readInput('inputMini')
-data = readInput('inputFile')
-
-
-output = 0
+data = readInput('inputMini')
+#data = readInput('inputFile')
 
 def parseData(line):
     out = line.split(':')
@@ -36,9 +33,7 @@ def parseData(line):
     print(draws)
     return winners,draws
 
-
 #main
-
 output=0
 for line in data:
     print(line)
