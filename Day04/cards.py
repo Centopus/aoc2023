@@ -5,21 +5,38 @@
 # 2023.12.02
 #
 
-#data
-#input = open('inputMini','r')
-#input = open('inputFile','r')
-
 def readInput(filename):
     with open(filename) as var1:
         data = [line.rstrip() for line in var1.readlines()]
     return data
 
-
+#data
 data = readInput('inputMini')
-for lineID, line in enumerate(data):
-    print(lineID, line)
+#data = readInput('inputFile')
+
 
 output = 0
+
+def parseData(line):
+    out = line.split(':')
+    CardNr = int(out[0].strip('Card '))
+
+    out = out[1].split('|')
+    #first set is winners, second set is draws
+    winners = out[0].strip().split(' ')
+    draws = out[1].strip().split(' ')
+    print(winners)
+    print(draws)
+#it does live extra empty stuff i need to remove
+
+    return winners,draws
+
+
+#main
+
+for line in data:
+    print(line)
+    winners,draws = parseData(line)
 
 #while True:
 #    line = input.readline()
