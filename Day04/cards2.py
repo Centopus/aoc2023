@@ -27,8 +27,6 @@ def parseData(line):
 
 count = [1]*len(data)
 j= [1]*len(data)
-print(j)
-print(count)
 
 for i in range(len(data)):
     j[i] = i
@@ -41,9 +39,7 @@ for i in j:
         if draw in winners:
             wins += 1
     secondIterator = i+1
-    print('Wins: '+str(wins))
     while wins > 0:
-        print(count[secondIterator])
         count[secondIterator] = count[secondIterator] + count[i]
         wins -= 1
         secondIterator += 1
