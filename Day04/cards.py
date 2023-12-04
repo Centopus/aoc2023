@@ -26,8 +26,12 @@ def parseData(line):
     winners = out[0].strip().split(' ')
     draws = out[1].strip().split(' ')
     #i need to read more about this filter function, now i just took it as in an example
-    winners = list(filter(lambda item: item is not None, winners))
-    draws = list(filter(lambda item: item is not None, draws))
+    #winners = list(filter(lambda item: item is not None, winners))
+    winners = [i for i in winners if i is not None]
+    winners = [i for i in winners if i is not '']
+    #draws = list(filter(lambda item: item is not None, draws))
+    draws = [i for i in draws if i is not None]
+    draws = [i for i in draws if i is not '']
     print(winners)
     print(draws)
     return winners,draws
