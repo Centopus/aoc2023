@@ -11,8 +11,8 @@ def readInput(filename):
     return data
 
 #data
-data = readInput('inputMini')
-#data = readInput('inputFile')
+#data = readInput('inputMini')
+data = readInput('inputFile')
 
 
 output = 0
@@ -25,54 +25,29 @@ def parseData(line):
     #first set is winners, second set is draws
     winners = out[0].strip().split(' ')
     draws = out[1].strip().split(' ')
+    #i need to read more about this filter function, now i just took it as in an example
+    winners = list(filter(lambda item: item is not None, winners))
+    draws = list(filter(lambda item: item is not None, draws))
     print(winners)
     print(draws)
-#it does live extra empty stuff i need to remove
-
     return winners,draws
 
 
 #main
 
+output=0
 for line in data:
     print(line)
+    victory = 0
+    first = True
     winners,draws = parseData(line)
-
-#while True:
-#    line = input.readline()
-#
-#    if not line:
-#        break
-#    #we do not want the new line
-#    line = line.rstrip()
-#    print(line)
-#    # Game goes into 1 side, rest goes to the other side
-#    out = line.split(':')
-#    #we get the game number
-#    GameNr = int(out[0].strip('Game '))
-#    print(GameNr)
-#    #now we split the sets with semicolon
-#    out = out[1].split(';')
-#    #now we iterate over the split sets
-#    GameOK = True
-#    for reach in out:
-#        #print(reach)
-#        for item in reach.split(','):
-#            #print(item)
-#            liczba = item.split(' ')
-#            if item.endswith('red'):
-#                if int(liczba[1]) > red_l:
-#                    print('ErrorR')
-#                    GameOK = False
-#            elif item.endswith('blue'):
-#                if int(liczba[1]) > blue_l:
-#                    print('ErrorB')
-#                    GameOK = False
-#            else:
-#                if int(liczba[1]) > green_l:
-#                    print('ErrorG')
-#                    GameOK = False
-#    if GameOK == True:
-#        output += GameNr
-#    print(output)
+    for draw in draws:
+        if draw in winners:
+            if first is True:
+                victory = 1
+                first = False
+            else:
+                victory = victory*2
+    print(victory)
+    output = output + victory
 print(output)
