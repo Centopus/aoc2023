@@ -12,7 +12,7 @@ def readInput(filename):
 
 #data
 data = readInput('inputMini')
-data = readInput('inputFile')
+#data = readInput('inputFile')
 
 def numbers(line):
     numbers = line.split(' ')
