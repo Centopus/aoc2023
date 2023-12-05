@@ -60,6 +60,15 @@ def seed2location(seedid,book):
 
     return seedid
 
+def seedGenerator(seeds):
+    los=[]
+    for i in range(0,len(seeds),2):
+        start = int(seeds[i])
+        count = int(seeds[i+1])
+        for j in range(start,count+start,1):
+            los.append(j)
+    return los
+
 #main
 
 #we get our map starts - detection where empty lines are.
@@ -80,12 +89,13 @@ for i in starts:
 #print(book[0][1][0][0]) #single digt of map?
 #book[map choice][0-name,1-map][0..X-lines of map][o-destination 1- source 2- length]
 
-print(seeds(data[0]))
+#print(seeds(data[0]))
+#print(seedGenerator(seeds(data[0])))
 
 #seed2location(14,book)
 output = 9999999999999999
 
-for seed in seeds(data[0]):
+for seed in seedGenerator(seeds(data[0])):
     temp = (seed2location(seed,book))
     if output > temp:
         output = temp
