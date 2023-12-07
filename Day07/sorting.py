@@ -12,6 +12,7 @@ def readInput(filename):
 
 #data
 data = readInput('inputMini')
+#data = readInput('inputMicro')
 data = readInput('inputFile')
 
 def numbers(line):
@@ -94,8 +95,6 @@ def is_left_GT_right(cardL,powerL,cardR,powerR):
 def FiveOfKind(sequence):
     if sequence.count(sequence[0]) == 5:
         return 70
-    else:
-        return 0
     return 0
 
 def FourOfKind(sequence):
@@ -103,8 +102,6 @@ def FourOfKind(sequence):
         return 60
     elif sequence.count(sequence[1]) == 4:
         return 60
-    else:
-        return 0
     return 0
 
 def FullHouse(sequence):
@@ -126,40 +123,34 @@ def FullHouse(sequence):
             return 50
         else:
             return 40
-    else:
-        return 0
     return 0
 
 def TwoPair(sequence):
-    power = 30
     if sequence.count(sequence[0]) == 2:
         sequence = sequence.replace(sequence[0],'')
         if sequence.count(sequence[0]) == 2:
-            return power
+            return 30
         elif sequence.count(sequence[1]) == 2:
-            return power
+            return 30
         else:
-            #single pair
             return 20
     elif sequence.count(sequence[1]) == 2:
         sequence = sequence.replace(sequence[1],'')
         if sequence.count(sequence[0]) == 2:
-            return power
+            return 30
         elif sequence.count(sequence[1]) == 2:
-            return power
+            return 30
         else:
             return 20
     elif sequence.count(sequence[2]) == 2:
         return 20
     elif sequence.count(sequence[3]) == 2:
         return 20
-    else:
-        return 0
     return 0
 
 #we need to rank this too...
 #and this will be nice to rank same power things
-#A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, 2
+# A,  K,  Q,  J,  T, 9, 8, 7, 6, 5, 4, 3, 2
 #14, 13, 12, 11, 10
 def HighCard(sequence):
     if 'A' in sequence:
@@ -186,11 +177,10 @@ def HighCard(sequence):
         return 4
     elif '3' in sequence:
         return 3
-    else:
-        return 2
     return 2
 
 def rankCard(sequence):
+    temp = 0
     temp = FiveOfKind(sequence)
     if temp > 0:
         return temp
@@ -220,15 +210,10 @@ for card in cards:
 #print(powers)
 #print(bets)
 i=0
-
 size = len(cards)
 while i < size:
     print( cards[i]+' : ' + bets[i] + ' :: ' + str(powers[i]) )
     i +=1
-#i=0
-#while i < len(cards):
-#    print(is_left_GT_right(cards[i],powers[i],cards[1],powers[1]))
-#    i +=1
 print('----------------------------')
 quickSort(cards,powers,bets,0,size -1)
 i=0
@@ -238,10 +223,7 @@ while i < size:
 i=0
 suma=0
 while i < size:
-#    print(bets[i])
-#    print(i+1)
     suma = suma + int(bets[i])*(i+1)
-#    print(suma)
     i += 1
 print(suma)
 
