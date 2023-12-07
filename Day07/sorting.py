@@ -19,11 +19,6 @@ def numbers(line):
     numbers = [i for i in numbers if i != '']
     return numbers
 
-def parsing(line):
-    out = line.split(':')
-    data_tag = (out[0])
-    data = numbers(out[1])
-    return data
 
 # Function to find the partition position
 def partition(array, low, high):
@@ -52,9 +47,9 @@ def partition(array, low, high):
     # Return the position from where partition is done
     return i + 1
 
+
+
 # function to perform quicksort
-
-
 def quickSort(array, low, high):
     if low < high:
 
@@ -69,22 +64,79 @@ def quickSort(array, low, high):
         # Recursive call on the right of pivot
         quickSort(array, pi + 1, high)
 
+#comparison stuff goes here
+#dictionary:
+#A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, 2
 
+#the top most comparison function
+def is_left_GT_right(cardL,cardR):
+    answer = True
+    return answer
+
+def FiveOfKind(sequence):
+    power = 7
+    if sequence.count(sequence[0]) == 5:
+        return power
+    return 0
+
+def FourOfKind(sequence):
+    power = 6
+    if sequence.count(sequence[0]) == 4:
+        return power
+    elif sequence.count(sequence[1]) == 4:
+        return power
+    return 0
+
+def FullHouse(sequence):
+    power = 5
+    return 0
+
+def ThreeOfKind(sequence):
+    power = 4
+    if sequence.count(sequence[0]) == 3:
+        return power
+    elif sequence.count(sequence[1]) == 3:
+        return power
+    elif sequence.count(sequence[2]) == 3:
+        return power
+    return 0
+
+def TwoPair(sequence):
+    power = 3
+    return 0
+
+def OnePair(sequence):
+    power = 2
+    if sequence.count(sequence[0]) == 2:
+        return power
+    elif sequence.count(sequence[1]) == 2:
+        return power
+    elif sequence.count(sequence[2]) == 2:
+        return power
+    elif sequence.count(sequence[3]) == 2:
+        return power
+    return 0
+
+def HighCard(sequence):
+    power = 1
+    return 0
+
+print(FiveOfKind('FFFFF'))
+print(FiveOfKind('FFCFF'))
 #thats from quicksort implementation... need to update it
-
-data = [1, 7, 4, 1, 10, 9, -2]
-print("Unsorted Array")
-print(data)
-
-size = len(data)
-
-quickSort(data, 0, size - 1)
-
-print('Sorted Array in Ascending Order:')
-print(data)
+#data = [1, 7, 4, 1, 10, 9, -2]
+#print("Unsorted Array")
+#print(data)
+#size = len(data)
+#quickSort(data, 0, size - 1)
+#print('Sorted Array in Ascending Order:')
+#print(data)
 
 #to do ^^^
 
 #main
-print(output)
+cards=[]
+for line in data:
+    cards.append(numbers(line))
+print(cards)
 
