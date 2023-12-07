@@ -74,13 +74,13 @@ def is_left_GT_right(cardL,cardR):
     return answer
 
 def FiveOfKind(sequence):
-    power = 7
+    power = 70
     if sequence.count(sequence[0]) == 5:
         return power
     return 0
 
 def FourOfKind(sequence):
-    power = 6
+    power = 60
     if sequence.count(sequence[0]) == 4:
         return power
     elif sequence.count(sequence[1]) == 4:
@@ -88,41 +88,104 @@ def FourOfKind(sequence):
     return 0
 
 def FullHouse(sequence):
-    power = 5
-    return 0
-
-def ThreeOfKind(sequence):
-    power = 4
+    #also does 3 of a Kind
+    power = 50
     if sequence.count(sequence[0]) == 3:
-        return power
+        sequence = sequence.replace(sequence[0],'')
+        print(sequence)
+        if sequence.count(sequence[0]) == 2:
+            return power
+        else:
+            return 40
     elif sequence.count(sequence[1]) == 3:
-        return power
+        sequence = sequence.replace(sequence[1],'')
+        if sequence.count(sequence[0]) == 2:
+            return power
+        else:
+            return 40
     elif sequence.count(sequence[2]) == 3:
-        return power
+        sequence = sequence.replace(sequence[2],'')
+        if sequence.count(sequence[0]) == 2:
+            return power
+        else:
+            return 40
+    #at this point we have 3 and removed them
     return 0
 
 def TwoPair(sequence):
-    power = 3
-    return 0
-
-def OnePair(sequence):
-    power = 2
+    power = 30
     if sequence.count(sequence[0]) == 2:
-        return power
+        sequence = sequence.replace(sequence[0],'')
+        if sequence.count(sequence[0]) == 2:
+            return power
+        elif sequence.count(sequence[1]) == 2:
+            return power
+        else:
+            #single pair
+            return 20
     elif sequence.count(sequence[1]) == 2:
-        return power
-    elif sequence.count(sequence[2]) == 2:
-        return power
-    elif sequence.count(sequence[3]) == 2:
-        return power
+        sequence = sequence.replace(sequence[1],'')
+        if sequence.count(sequence[0]) == 2:
+            return power
+        elif sequence.count(sequence[1]) == 2:
+            return power
     return 0
 
+#we need to rank this too...
+#and this will be nice to rank same power things
+#A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, 2
+#14, 13, 12, 11, 10
 def HighCard(sequence):
-    power = 1
-    return 0
+    if 'A' in sequence:
+        return 14
+    elif 'K' in sequence:
+        return 13
+    elif 'Q' in sequence:
+        return 12
+    elif 'J' in sequence:
+        return 11
+    elif 'T' in sequence:
+        return 10
+    elif '9' in sequence:
+        return 9
+    elif '8' in sequence:
+        return 8
+    elif '7' in sequence:
+        return 7
+    elif '6' in sequence:
+        return 6
+    elif '5' in sequence:
+        return 5
+    elif '4' in sequence:
+        return 4
+    elif '3' in sequence:
+        return 3
+    else:
+        return 2
+    return 2
+
+def rankCard(sequence):
+    temp = FiveOfKind(sequence)
+    if temp > 0:
+        return tempa
+    temp = FourOfKind(sequence)
+    if temp > 0:
+        return temp
+    temp = FullHouse(sequence)
+    if temp > 0:
+        return temp
+    temp = TwoPair(sequence)
+    if temp > 0:
+        return temp
+    temp = HighCard(sequence)
+    return temp
+
 
 print(FiveOfKind('FFFFF'))
 print(FiveOfKind('FFCFF'))
+print(rankCard('AAA44'))
+print(rankCard('AA244'))
+print(rankCard('AKQJT'))
 #thats from quicksort implementation... need to update it
 #data = [1, 7, 4, 1, 10, 9, -2]
 #print("Unsorted Array")
