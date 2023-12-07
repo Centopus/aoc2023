@@ -13,6 +13,7 @@ def readInput(filename):
 #data
 data = readInput('inputMini')
 #data = readInput('inputFile')
+#too high 
 
 def numbers(line):
     numbers = line.split(' ')
