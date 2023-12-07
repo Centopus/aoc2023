@@ -69,9 +69,21 @@ def quickSort(array, low, high):
 #A, K, Q, J, T, 9, 8, 7, 6, 5, 4, 3, 2
 
 #the top most comparison function
-def is_left_GT_right(cardL,cardR):
-    answer = True
-    return answer
+def is_left_GT_right(cardL,powerL,cardR,powerR):
+    if powerL > powerR:
+        return True
+    elif powerL < powerR:
+        return False
+    else:
+        i=0
+        while i < 5:
+            print('comparing '+ str(cardL[i])+ ' '+ str(cardR[i]))
+            if HighCard(cardL[i]) > HighCard(cardR[i]):
+                return True
+            elif HighCard(cardL[i]) < HighCard(cardR[i]):
+                return False
+            i += 1
+    return None
 
 def FiveOfKind(sequence):
     power = 70
@@ -92,7 +104,7 @@ def FullHouse(sequence):
     power = 50
     if sequence.count(sequence[0]) == 3:
         sequence = sequence.replace(sequence[0],'')
-        print(sequence)
+        #print(sequence)
         if sequence.count(sequence[0]) == 2:
             return power
         else:
@@ -129,6 +141,7 @@ def TwoPair(sequence):
             return power
         elif sequence.count(sequence[1]) == 2:
             return power
+        return 20
     return 0
 
 #we need to rank this too...
@@ -181,11 +194,11 @@ def rankCard(sequence):
     return temp
 
 
-print(FiveOfKind('FFFFF'))
-print(FiveOfKind('FFCFF'))
-print(rankCard('AAA44'))
-print(rankCard('AA244'))
-print(rankCard('AKQJT'))
+#print(FiveOfKind('FFFFF'))
+#print(FiveOfKind('FFCFF'))
+#print(rankCard('AAA44'))
+#print(rankCard('AA244'))
+#print(rankCard('AKQJT'))
 #thats from quicksort implementation... need to update it
 #data = [1, 7, 4, 1, 10, 9, -2]
 #print("Unsorted Array")
@@ -199,7 +212,18 @@ print(rankCard('AKQJT'))
 
 #main
 cards=[]
+bets=[]
+powers=[]
 for line in data:
-    cards.append(numbers(line))
-print(cards)
+    cards.append(numbers(line)[0])
+    bets.append(numbers(line)[1])
+for card in cards:
+    powers.append(rankCard(card))
+print(cards,powers,bets)
+#print(powers)
+#print(bets)
 
+i=0
+while i < len(cards):
+    print(is_left_GT_right(cards[i],powers[i],cards[1],powers[1]))
+    i +=1
