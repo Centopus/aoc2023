@@ -12,7 +12,7 @@ def readInput(filename):
 
 #data
 data = readInput('inputMini')
-data = readInput('inputFile')
+#data = readInput('inputFile')
 
 def numbers(line):
     numbers = line.split(' ')
@@ -41,14 +41,14 @@ def partition(array,powers,bets, low, high):
             i = i + 1
 
             # Swapping element at i with element at j
-            (array[i], array[j]) = (array[j], array[i])
+            ( array[i],  array[j]) = ( array[j],  array[i])
             (powers[i], powers[j]) = (powers[j], powers[i])
-            (bets[i], bets[j]) = (bets[j], bets[i])
+            (  bets[i],   bets[j]) = (  bets[j],   bets[i])
 
     # Swap the pivot element with the greater element specified by i
-    (array[i + 1], array[high]) = (array[high], array[i + 1])
+    ( array[i + 1],  array[high]) = ( array[high],  array[i + 1])
     (powers[i + 1], powers[high]) = (powers[high], powers[i + 1])
-    (bets[i + 1], bets[high]) = (bets[high], bets[i + 1])
+    (  bets[i + 1],   bets[high]) = (  bets[high],   bets[i + 1])
 
     # Return the position from where partition is done
     return i + 1
@@ -89,7 +89,7 @@ def is_left_GT_right(cardL,powerL,cardR,powerR):
             elif HighCard(cardL[i]) < HighCard(cardR[i]):
                 return False
             i += 1
-    return False
+    return True
 
 def FiveOfKind(sequence):
     power = 70
@@ -148,6 +148,11 @@ def TwoPair(sequence):
         elif sequence.count(sequence[1]) == 2:
             return power
         return 20
+    elif sequence.count(sequence[3]) == 2:
+        return 20
+    elif sequence.count(sequence[4]) == 2:
+        return 20
+
     return 0
 
 #we need to rank this too...
@@ -200,22 +205,6 @@ def rankCard(sequence):
     return temp
 
 
-#print(FiveOfKind('FFFFF'))
-#print(FiveOfKind('FFCFF'))
-#print(rankCard('AAA44'))
-#print(rankCard('AA244'))
-#print(rankCard('AKQJT'))
-#thats from quicksort implementation... need to update it
-#data = [1, 7, 4, 1, 10, 9, -2]
-#print("Unsorted Array")
-#print(data)
-#size = len(data)
-#quickSort(data, 0, size - 1)
-#print('Sorted Array in Ascending Order:')
-#print(data)
-
-#to do ^^^
-
 #main
 cards=[]
 bets=[]
@@ -225,25 +214,32 @@ for line in data:
     bets.append(numbers(line)[1])
 for card in cards:
     powers.append(rankCard(card))
-print(cards) #,powers,bets)
-print(powers)
-print(bets)
+#print(cards) #,powers,bets)
+#print(powers)
+#print(bets)
+i=0
 
+size = len(cards)
+while i < size:
+    print( cards[i]+' : ' + bets[i] + ' :: ' + str(powers[i]) )
+    i +=1
 #i=0
 #while i < len(cards):
 #    print(is_left_GT_right(cards[i],powers[i],cards[1],powers[1]))
 #    i +=1
-size = len(cards)
+print('----------------------------')
 quickSort(cards,powers,bets,0,size -1)
-print(cards)
-print(powers)
-print(bets)
-
+i=0
+while i < size:
+    print(cards[i]+' : '+bets[i] + ' :: ' + str(powers[i]))
+    i += 1
 i=0
 suma=0
 while i < size:
+#    print(bets[i])
+#    print(i+1)
     suma = suma + int(bets[i])*(i+1)
-    print(suma)
+#    print(suma)
     i += 1
 print(suma)
 
