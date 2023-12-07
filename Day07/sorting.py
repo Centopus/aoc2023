@@ -12,7 +12,7 @@ def readInput(filename):
 
 #data
 data = readInput('inputMini')
-#data = readInput('inputFile')
+data = readInput('inputFile')
 
 def numbers(line):
     numbers = line.split(' ')
@@ -186,7 +186,7 @@ def HighCard(sequence):
 def rankCard(sequence):
     temp = FiveOfKind(sequence)
     if temp > 0:
-        return tempa
+        return temp
     temp = FourOfKind(sequence)
     if temp > 0:
         return temp
