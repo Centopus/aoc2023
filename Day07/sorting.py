@@ -12,8 +12,7 @@ def readInput(filename):
 
 #data
 data = readInput('inputMini')
-#data = readInput('inputFile')
-#too high 
+data = readInput('inputFile')
 
 def numbers(line):
     numbers = line.split(' ')
@@ -93,42 +92,42 @@ def is_left_GT_right(cardL,powerL,cardR,powerR):
     return True
 
 def FiveOfKind(sequence):
-    power = 70
     if sequence.count(sequence[0]) == 5:
-        return power
+        return 70
+    else:
+        return 0
     return 0
 
 def FourOfKind(sequence):
-    power = 60
     if sequence.count(sequence[0]) == 4:
-        return power
+        return 60
     elif sequence.count(sequence[1]) == 4:
-        return power
+        return 60
+    else:
+        return 0
     return 0
 
 def FullHouse(sequence):
-    #also does 3 of a Kind
-    power = 50
     if sequence.count(sequence[0]) == 3:
         sequence = sequence.replace(sequence[0],'')
-        #print(sequence)
         if sequence.count(sequence[0]) == 2:
-            return power
+            return 50
         else:
             return 40
     elif sequence.count(sequence[1]) == 3:
         sequence = sequence.replace(sequence[1],'')
         if sequence.count(sequence[0]) == 2:
-            return power
+            return 50
         else:
             return 40
     elif sequence.count(sequence[2]) == 3:
         sequence = sequence.replace(sequence[2],'')
         if sequence.count(sequence[0]) == 2:
-            return power
+            return 50
         else:
             return 40
-    #at this point we have 3 and removed them
+    else:
+        return 0
     return 0
 
 def TwoPair(sequence):
@@ -148,12 +147,14 @@ def TwoPair(sequence):
             return power
         elif sequence.count(sequence[1]) == 2:
             return power
+        else:
+            return 20
+    elif sequence.count(sequence[2]) == 2:
         return 20
     elif sequence.count(sequence[3]) == 2:
         return 20
-    elif sequence.count(sequence[4]) == 2:
-        return 20
-
+    else:
+        return 0
     return 0
 
 #we need to rank this too...
