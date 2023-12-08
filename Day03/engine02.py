@@ -7,10 +7,10 @@
 import re
 
 #data
-#inputF = open('inputMini','r')
+inputF = open('inputMini','r')
 #inputF = open('inputMini2','r')
 #inputF = open('inputMini3','r')
-inputF = open('inputFile','r')
+#inputF = open('inputFile','r')
 
 #regex filters
 di = re.compile(r'\d+')
