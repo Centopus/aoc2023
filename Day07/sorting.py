@@ -11,8 +11,11 @@ def readInput(filename):
     return data
 
 #data
-data = readInput('inputMini')
+#data = readInput('inputMini')
 #data = readInput('inputMicro')
+#data = readInput('inputReddit_1343')
+#data = readInput('inputSwe_251136060')
+#data = readInput('inputWrald')
 data = readInput('inputFile')
 
 def numbers(line):
@@ -146,7 +149,7 @@ def TwoPair(sequence):
         return 20
     elif sequence.count(sequence[3]) == 2:
         return 20
-    return 0
+    return 10
 
 #we need to rank this too...
 #and this will be nice to rank same power things
@@ -223,7 +226,7 @@ while i < size:
 i=0
 suma=0
 while i < size:
+    #print(bets[i])
     suma = suma + int(bets[i])*(i+1)
     i += 1
 print(suma)
-
