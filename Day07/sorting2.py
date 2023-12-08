@@ -102,53 +102,146 @@ def FiveOfKind(sequence):
 
 def FourOfKind(sequence):
     if sequence.count(sequence[0]) == 4:
+        if sequence[0] == 'J':
+            return 69
+        sequence = sequence.replace(sequence[0],'')
+        if sequence[0] == 'J':
+            return 69
         return 60
     elif sequence.count(sequence[1]) == 4:
+        if sequence[1] == 'J':
+            return 69
+        if sequence[0] == 'J':
+            return 69
         return 60
     return 0
 
 def FullHouse(sequence):
     if sequence.count(sequence[0]) == 3:
+        temp = sequence[0]
         sequence = sequence.replace(sequence[0],'')
         if sequence.count(sequence[0]) == 2:
+            if temp == 'J' or sequence[0] == 'J':
+                return 69
             return 50
         else:
+            if temp == 'J':
+                return 49
+            elif sequence[0] == 'J' or sequence[1] == 'J':
+                return 49
             return 40
     elif sequence.count(sequence[1]) == 3:
+        temp = sequence[1]
         sequence = sequence.replace(sequence[1],'')
         if sequence.count(sequence[0]) == 2:
+            if temp == 'J' or sequence[0] == 'J':
+                return 69
             return 50
         else:
+            if temp = 'J':
+                return 49
+            elif sequence[0] == 'J' or sequence[1] == 'J':
+                return 49
             return 40
     elif sequence.count(sequence[2]) == 3:
+        temp = sequence[2]
         sequence = sequence.replace(sequence[2],'')
         if sequence.count(sequence[0]) == 2:
+            if temp == 'J' or sequence[0] == 'J':
+                return 69
             return 50
         else:
+            if temp = 'J':
+                return 49
+            elif sequence[0] == 'J' or sequence[1] == 'J':
+                return 49
             return 40
     return 0
 
 def TwoPair(sequence):
     if sequence.count(sequence[0]) == 2:
+        temp = sequence[0]
         sequence = sequence.replace(sequence[0],'')
         if sequence.count(sequence[0]) == 2:
+            if temp == 'J':
+                #4ofkind
+                return 59
+            elif sequence[0] == 'J':
+                #4ofkind
+                return 59
+            elif sequence.replace(sequence[0],'')[0] == 'J':
+                #full
+                return 49
+            #2pair
             return 30
         elif sequence.count(sequence[1]) == 2:
+            if sequence[1] == 'J':
+                #4ofkind
+                return 59
+            elif sequence[0] == 'J':
+                #full
+                return 49
+            #2pair
             return 30
         else:
+            #joker check here
+            if temp == 'J':
+                #3ofK
+                return 39
+            elif sequence.count('J') > 0:
+                #3ofk
+                return 39
             return 20
     elif sequence.count(sequence[1]) == 2:
+        temp = sequence[1]
         sequence = sequence.replace(sequence[1],'')
         if sequence.count(sequence[0]) == 2:
+            if temp == 'J' or sequence[0] == 'J':
+                #4ofkind
+                return 59
+            elif sequence.replace(sequence[0],'')[0] == 'J':
+                #full
+                return 49
+            #2pair
             return 30
         elif sequence.count(sequence[1]) == 2:
+            if temp == 'J' or sequence[1] == 'J':
+                #4ofk
+                return 59
+            elif sequence.replace(sequence[1],'')[0] == 'J':
+                #full
+                return 49
+            #2pair
             return 30
         else:
+            #joker check here
+            if temp == 'J':
+                #3ofK
+                return 39
+            elif sequence.count('J') > 0:
+                #3ofk
+                return 39
             return 20
     elif sequence.count(sequence[2]) == 2:
+        if sequence[2] == 'J':
+            #3ofk
+            return 39
+        elif sequence.replace(sequence[2],'').count('J') > 0:
+            #3ofk
+            return 39
         return 20
     elif sequence.count(sequence[3]) == 2:
+        if sequence[3] == 'J':
+            #3ofk
+            return 39
+        elif sequence.replace(sequence[3],'').count('J') > 0:
+            #3ofk
+            return 39
         return 20
+    #joker detection here
+    if sequence.count('J') > 0:
+        #pair
+        return 19
     return 10
 
 #we need to rank this too...
@@ -162,8 +255,8 @@ def HighCard(sequence):
         return 13
     elif 'Q' in sequence:
         return 12
-    elif 'J' in sequence:
-        return 11
+    #elif 'J' in sequence:
+    #    return 11
     elif 'T' in sequence:
         return 10
     elif '9' in sequence:
@@ -180,7 +273,10 @@ def HighCard(sequence):
         return 4
     elif '3' in sequence:
         return 3
-    return 2
+    elif '2' in sequence:
+        return 2
+    #Joker left...
+    return 1
 
 def rankCard(sequence):
     temp = 0
