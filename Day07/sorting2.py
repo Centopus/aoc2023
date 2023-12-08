@@ -97,6 +97,8 @@ def is_left_GT_right(cardL,powerL,cardR,powerR):
 
 def FiveOfKind(sequence):
     if sequence.count(sequence[0]) == 5:
+        if sequence[0] == 'J':
+            return 69
         return 70
     return 0
 
@@ -138,7 +140,7 @@ def FullHouse(sequence):
                 return 69
             return 50
         else:
-            if temp = 'J':
+            if temp == 'J':
                 return 49
             elif sequence[0] == 'J' or sequence[1] == 'J':
                 return 49
@@ -151,7 +153,7 @@ def FullHouse(sequence):
                 return 69
             return 50
         else:
-            if temp = 'J':
+            if temp == 'J':
                 return 49
             elif sequence[0] == 'J' or sequence[1] == 'J':
                 return 49
@@ -326,3 +328,5 @@ while i < size:
     suma = suma + int(bets[i])*(i+1)
     i += 1
 print(suma)
+
+#print(rankCard('JJJAJ'))
